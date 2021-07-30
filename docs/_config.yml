@@ -1,8 +1,8 @@
-repository: amaiya/causalnlp
+repository: amaiya/quixotic
 output: web
-topnav_title: causalnlp
+topnav_title: quixotic
 #default_badges: {colab: true}
-site_title: causalnlp
+site_title: quixotic
 company_name: Arun S. Maiya
 description: CausalNLP
 # Set to false to disable KaTeX math
