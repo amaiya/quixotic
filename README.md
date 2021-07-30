@@ -3,7 +3,7 @@
 
 
 ## What is Quixotic?
-> Quixotic is a Python library for low-code, simple-to-use quantum computing.
+> Quixotic is a Python library for simple-to-use, low-code quantum computing.
 
 ## Features
 - Easy-to-apply quantum algorithms to a number of combinatorial optimization problems using [Quantum Annealing](https://en.wikipedia.org/wiki/Quantum_annealing) and [QAOA](https://arxiv.org/abs/1411.4028).
@@ -19,7 +19,7 @@
 
 ## Usage: Find Maximum Clique in a Graph
 
-```
+```python
 # construct or load your input graph
 import networkx as nx
 n_nodes = 6
@@ -34,14 +34,14 @@ nx.draw(g, with_labels=True, pos=positions, node_size=600)
 ![png](docs/images/output_5_0.png)
 
 
-```
+```python
 # approximate a solution using QuantumAnnealer and extract results
 from quixotic.core import QuantumAnnealer
 qo = QuantumAnnealer(g, task='maximum_clique').fit()
 nodes = qo.results()
 ```
 
-```
+```python
 # plot nodes comprising the solution
 sub = g.subgraph(nodes)
 nx.draw(g, pos=positions, with_labels=True)
