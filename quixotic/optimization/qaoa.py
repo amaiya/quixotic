@@ -13,7 +13,6 @@ from .base import QuantumOptimizer, DEFAULT_LOCAL_SIMULATOR
 
 SUPPORTED_TASKS = {'maximum_clique': qml.qaoa.max_clique,
                   'minimum_vertex_cover': qml.qaoa.min_vertex_cover,
-                   'maximum_weighted_cycle' : qml.qaoa.max_weight_cycle,
                    'maximum_cut' : qml.qaoa.maxcut,
                   }
 QAOA_LOCAL = 'braket.local.qubit'
