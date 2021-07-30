@@ -4,20 +4,30 @@ __all__ = ['QuantumAnnealer', 'SUPPORTED_TASKS', 'QA_LOCAL']
 
 # Cell
 
+import networkx as nx
+import warnings
+
 # dwave imports
 import dwave_networkx as dnx
 from dwave.system.composites import EmbeddingComposite
-import neal
 
 # local imports
 from .base import QuantumOptimizer, DEFAULT_LOCAL_SIMULATOR
 
 
 SUPPORTED_TASKS = {'maximum_clique': dnx.maximum_clique,
-                  'minimum_vertex_cover': dnx.min_vertex_cover}
+                  'minimum_vertex_cover': dnx.min_vertex_cover,
+                   'minimum_weighted_vertex_cover' :dnx.min_weighted_vertex_cover,
+                   'maximum_independent_set': dnx.maximum_independent_set,
+                   'maximum_weighted_independent_set' : dnx.maximum_weighted_independent_set,
+                   'maximum_cut' : dnx.maximum_cut,
+                   'weighted_maximum_cut' : dnx.weighted_maximum_cut,
+                   'traveling_salesperson' : dnx.traveling_salesperson
+                  }
 QA_LOCAL = 'dwave-neal'
 
 class QuantumAnnealer:
+
     """quantum-based combinatorial optimization with Amazon Braket
 
 
@@ -26,9 +36,9 @@ class QuantumAnnealer:
     ```python
     >>> qo = QuantumAnnealer(g,
                             task='maximum_clique',
-                            device_name='braket.local.qubit', # default braket local simulator
-                            device_arn='device_arn',
-                            s3_folder='s3_folder')
+                            device_name='local',     # uses local simulator solver
+                            device_arn='device_arn', # only needed if not local
+                            s3_folder='s3_folder')   # only needed if not local
         qo.fit()
         results = qo.results()
     ```
@@ -48,9 +58,11 @@ class QuantumAnnealer:
         """
         # error checks
         if task not in SUPPORTED_TASKS: raise ValueError(f'task {task} is not supported. ' +\
-                                                         f'Supported tasks: {SUPPORTED_TASKS}')
+                                                         f'Supported tasks: {list(SUPPORTED_TASKS.keys())}')
         if not local and (device_arn is None or s3_folder is None):
             raise ValueError('device_arn and s3_folder are required if using managed AWS device')
+        if local and (device_arn is not None or s3_folder is not None):
+            warnings.warn('Using local simulator/solver, so device_arn and s3_folder is ignored. ')
         if not isinstance(g, nx.Graph): raise ValueError('g must be instance of networkx.Graph')
 
         # input vars
@@ -72,7 +84,9 @@ class QuantumAnnealer:
 
     def fit(self, verbose=1):
         """
-        approximate a solution to given task
+        Approximate a solution to given task.
+        Simulated Annealing is used when `QuantumAnnealer.local=True`.
+        Quantum Annealing is used when `QuantumAnnealer.local=False`.
         """
 
         # setup sampler
@@ -88,16 +102,20 @@ class QuantumAnnealer:
             sampler = EmbeddingComposite(braket_sampler)
 
         # generate approximation
-
+        kwargs = {}
+        if 'weighted' in 'self.task': kwargs['weight'] = 'weight'
         apx_fn = SUPPORTED_TASKS[self.task]
         if self.local:
-            result = apx_fn(self.g, sampler)
+            result = apx_fn(self.g, sampler, **kwargs)
         else:
-            result = apx_fn(self.g, sampler, resultFormat="HISTOGRAM")
+            kwargs['resultFormat'] = 'HISTOGRAM'
+            #result = apx_fn(self.g, sampler, resultFormat="HISTOGRAM")
+            result = apx_fn(self.g, sampler, **kwargs)
+
 
         self._last_result = result
         self._fit_called = True
-        return
+        return self
 
     def results(self, **kwargs):
         """
@@ -107,7 +125,9 @@ class QuantumAnnealer:
         if 'return_probs' in kwargs and kwargs['return_probs']:
             warnings.warn('return_probs not currently supported in QuantumAnnealer, '+\
                           'so returning None for second return value.')
-        return self._last_result
+            return self._last_result, None
+        else:
+            return self._last_result
 
 
     def plot_samples(self, probs):

@@ -6,6 +6,7 @@
     "Quantum Annealing": "optimization.quantum_annealing.html",
     "QAOA Optimization": "optimization.qaoa.html",
     "Utils": "utils.html",
-    "Examples": "examples.html"
+    "Examples - QAOA": "examples_qaoa.html",
+    "Examples - Quantum Annealing": "examples_quantum_annealing.html"
   }
 }

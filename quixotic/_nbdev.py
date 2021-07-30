@@ -4,19 +4,19 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"QuantumOptimizer": "01_optimization.base.ipynb",
          "DEFAULT_LOCAL_SIMULATOR": "01_optimization.base.ipynb",
-         "QAOA": "03_optimization.qaoa.ipynb",
-         "SUPPORTED_TASKS": "03_optimization.qaoa.ipynb",
-         "QAOA_LOCAL": "03_optimization.qaoa.ipynb",
          "QuantumAnnealer": "02_optimization.quantum_annealing.ipynb",
+         "SUPPORTED_TASKS": "03_optimization.qaoa.ipynb",
          "QA_LOCAL": "02_optimization.quantum_annealing.ipynb",
+         "QAOA": "03_optimization.qaoa.ipynb",
+         "QAOA_LOCAL": "03_optimization.qaoa.ipynb",
          "add_metrics_to_log": "98_utils.ipynb",
          "log_to_message": "98_utils.ipynb",
          "ProgressBar": "98_utils.ipynb"}
 
 modules = ["core.py",
            "optimization/base.py",
-           "optimization/qaoa.py",
            "optimization/quantum_annealing.py",
+           "optimization/qaoa.py",
            "utils.py"]
 
 doc_url = "https://amaiya.github.io/quixotic/"

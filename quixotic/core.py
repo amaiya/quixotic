@@ -3,4 +3,5 @@
 __all__ = []
 
 # Cell
+from .optimization.quantum_annealing import QuantumAnnealer
 from .optimization.qaoa import QAOA
