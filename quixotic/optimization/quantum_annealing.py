@@ -48,8 +48,8 @@ class QuantumAnnealer:
     * **g** : a networkx Graph object
     * **task** : one of {'maximum_clique'}
     * **device_name** : one of {'braket.local.qubit', 'braket.aws.qubit'}
-    * **device_arn** : Device ARN. Only required if name != 'braket.local.simulator'.
-    * **s3_folder** : S3 folder. Only required if name != 'braket.local.simulator'.
+    * **device_arn** : Device ARN. Only required if name != 'local'.
+    * **s3_folder** : S3 folder. Only required if name != 'local'.
     """
     def __init__(self, g, task=None,
                  local=True, device_arn=None, s3_folder=None):
@@ -62,7 +62,7 @@ class QuantumAnnealer:
         if not local and (device_arn is None or s3_folder is None):
             raise ValueError('device_arn and s3_folder are required if using managed AWS device')
         if local and (device_arn is not None or s3_folder is not None):
-            warnings.warn('Using local simulator/solver, so device_arn and s3_folder is ignored. ')
+            warnings.warn('local=True is being ignored since device_arn and s3_folder exist. ')
         if not isinstance(g, nx.Graph): raise ValueError('g must be instance of networkx.Graph')
 
         # input vars
