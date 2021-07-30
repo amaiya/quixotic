@@ -6,7 +6,7 @@
 > Quixotic is a Python library for simple-to-use, low-code quantum computing.
 
 ## Features
-- Easy-to-apply quantum algorithms to a number of combinatorial optimization problems using [Quantum Annealing](https://en.wikipedia.org/wiki/Quantum_annealing) and [QAOA](https://arxiv.org/abs/1411.4028).
+- Easy-to-apply quantum algorithms for a number of combinatorial optimization problems using [Quantum Annealing](https://en.wikipedia.org/wiki/Quantum_annealing) and [QAOA](https://arxiv.org/abs/1411.4028).
 - Includes out-of-the-box support for various optimization problems like maximum clique and minimum vertex cover.
 - Supports execution using both local simulation on your laptop and managed quantum computers on [Amazon Braket](https://aws.amazon.com/braket/).
 
