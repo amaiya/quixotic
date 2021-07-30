@@ -13,8 +13,14 @@ entries:
       title: Quixotic Core
       url: core.html
     - output: web,pdf
-      title: Optimization
-      url: optimization.html
+      title: Optimization Base
+      url: optimization.base.html
+    - output: web,pdf
+      title: Quantum Annealing
+      url: optimization.quantum_annealing.html
+    - output: web,pdf
+      title: QAOA Optimization
+      url: optimization.qaoa.html
     - output: web,pdf
       title: Utils
       url: utils.html

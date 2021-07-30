@@ -40,8 +40,8 @@ nb_path: "nbs/index.ipynb"
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Features">Features<a class="anchor-link" href="#Features"> </a></h2><ul>
-<li>Easy-to-apply quantum solutions to a number of combinatorial optimization problems using <a href="https://arxiv.org/abs/1411.4028">QAOA</a>.</li>
-<li>Includes out-of-the-box support for maximum clique, minimum vertex cover, and other problems.</li>
+<li>Easy-to-apply quantum solutions to a number of combinatorial optimization problems using <a href="https://arxiv.org/abs/1411.4028">QAOA</a> and <a href="https://en.wikipedia.org/wiki/Quantum_annealing">Quantum Annealing</a></li>
+<li>Includes out-of-the-box support for maximum clique, minimum vertex cover, and other optimization problems.</li>
 <li>Supports execution using both local simulation on your laptop and managed quantum computers on <a href="https://aws.amazon.com/braket/">Amazon Braket</a>.</li>
 </ul>
 
@@ -119,10 +119,10 @@ nb_path: "nbs/index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">quixotic.core</span> <span class="kn">import</span> <span class="n">QuantumOptimizer</span>
-<span class="n">qo</span> <span class="o">=</span> <span class="n">QuantumOptimizer</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="s1">&#39;maximum_clique&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">quixotic.core</span> <span class="kn">import</span> <span class="n">QAOA</span>
+<span class="n">qo</span> <span class="o">=</span> <span class="n">QAOA</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="s1">&#39;maximum_clique&#39;</span><span class="p">)</span>
 <span class="n">qo</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="n">nodes</span><span class="p">,</span> <span class="n">probs</span> <span class="o">=</span> <span class="n">qo</span><span class="o">.</span><span class="n">results</span><span class="p">()</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="n">qo</span><span class="o">.</span><span class="n">results</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -136,7 +136,7 @@ nb_path: "nbs/index.ipynb"
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Optimize for 10 iterations...
-[========================================] 100%	  cost: -2.4518  iteration:10</pre>
+[========================================] 100%	  cost: -1.8832  iteration:10</pre>
 </div>
 </div>
 
@@ -183,16 +183,6 @@ nb_path: "nbs/index.ipynb"
 </div>
     {% endraw %}
 
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><hr style="border:1px solid gray"> </hr></p>
-<blockquote><p>"Quantum computing and quantum communication are not beyond the boundaries of physics, but are still long-term prospects for use in the department.  We caution that the hyperbole surrounding these topics may be getting ahead of their military and economic utility."</p>
-</blockquote>
-<p><strong>Michael D. Griffin</strong>,  Undersecretary of Defense for Research and Engineering, during <a href="https://www.defense.gov/Explore/News/Article/Article/2110617/dod-should-focus-on-short-term-goals-in-quantum-science/">March 2020 testimony before the HASC</a>.</p>
-
-</div>
-</div>
-</div>
 </div>
  
 

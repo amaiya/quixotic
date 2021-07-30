@@ -3,4 +3,4 @@
 __all__ = []
 
 # Cell
-from .optimization import QuantumOptimizer
+from .optimization.qaoa import QAOA

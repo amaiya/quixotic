@@ -2,7 +2,9 @@
   "quixotic": {
     "Overview": "/",
     "Quixotic Core": "core.html",
-    "Optimization": "optimization.html",
+    "Optimization Base": "optimization.base.html",
+    "Quantum Annealing": "optimization.quantum_annealing.html",
+    "QAOA Optimization": "optimization.qaoa.html",
     "Utils": "utils.html",
     "Examples": "examples.html"
   }
