@@ -1,0 +1,9 @@
+{
+  "quixotic": {
+    "Overview": "/",
+    "Quixotic Core": "core.html",
+    "Optimization": "optimization.html",
+    "Utils": "utils.html",
+    "Examples": "examples.html"
+  }
+}
