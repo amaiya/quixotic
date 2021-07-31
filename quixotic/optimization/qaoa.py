@@ -143,7 +143,7 @@ class QAOA(QuantumOptimizer):
         self._fit_called = True
         return self
 
-    def results(self, shots = 100000, return_probs=False):
+    def results(self, shots = 1024, return_probs=False):
         """
         Sample and return results.
         Returns a tuple of the form: `(nodes, probs)`, where `nodes` are the list
