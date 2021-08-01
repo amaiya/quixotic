@@ -17,15 +17,13 @@
 
 **NOTE**: Python version `>= 3.7` is required.
 
-## Usage: Find Maximum Clique in a Graph
+## Usage Example: Find Maximum Clique in a Graph
 
 ```python
 # construct or load your input graph
 import networkx as nx
-n_nodes = 6
-p = 0.5  # probability of an edge
 seed = 1967
-g = nx.erdos_renyi_graph(n_nodes, p=p, seed=seed)
+g = nx.erdos_renyi_graph(6, p=0.5, seed=seed)
 positions = nx.spring_layout(g, seed=seed)
 nx.draw(g, with_labels=True, pos=positions, node_size=600)
 ```
@@ -52,10 +50,10 @@ nx.draw(sub, pos=positions, node_color="r", edge_color="r")
 ![png](docs/images/output_7_0.png)
 
 
-#### To execute on a Quantum Computer
-By default, **Quixotic** uses a local solver or simulator (e.g., simulated annealing insetad of quantum annealing), which allows you to easily run and test on your CPU-based laptop.  To run on an actual managed quantum computer hosted on Amazon Braket, simply set the `device_arn` and `s3_folder` parameters.  For `QuantumAnnealer`,  the `device_arn` should be a D-Wave QPU:
+#### To execute on a Quantum Computer:
+By default, **Quixotic** uses a local solver or simulator (e.g., quantum simulator, simulated annealing), which allows you to easily run and test on your CPU-based laptop.  To run on an actual managed quantum computer hosted on Amazon Braket, simply set the `device_arn` and `s3_folder` parameters.  For `QuantumAnnealer`,  the `device_arn` should be a D-Wave QPU:
 ```python
-# running on Amazon Braket
+# running on a quantum device managed by Amazon Braket
 from quixotic.core import QuantumAnnealer
 qo = QuantumAnnealer(g, task='maximum_clique',
                     device_arn='arn:aws:braket:::device/qpu/d-wave/DW_2000Q_6',  # D-Wave QPU
