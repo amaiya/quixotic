@@ -39,7 +39,7 @@ class QuantumAnnealer:
                             device_name='local',     # uses local simulator solver
                             device_arn='device_arn', # only needed if not local
                             s3_folder='s3_folder')   # only needed if not local
-        qo.fit()
+        qo.execute()
         results = qo.results()
     ```
 
@@ -75,7 +75,7 @@ class QuantumAnnealer:
 
         # computed vars
         self._last_result = None
-        self._fit_called = False
+        self._exec_called = False
 
     @staticmethod
     def supported_tasks():
@@ -117,14 +117,14 @@ class QuantumAnnealer:
 
 
         self._last_result = result
-        self._fit_called = True
+        self._exec_called = True
         return self
 
     def results(self, **kwargs):
         """
         Return approximated solution
         """
-        if not self._fit_called: raise Exception('The fit method must be called first.')
+        if not self._exec_called: raise Exception('The execute method must be called first.')
         if 'return_probs' in kwargs and kwargs['return_probs']:
             warnings.warn('return_probs not currently supported in QuantumAnnealer, '+\
                           'so returning None for second return value.')

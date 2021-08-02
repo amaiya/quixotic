@@ -29,7 +29,7 @@ class QAOA(QuantumOptimizer):
                   device_name='braket.local.qubit', # default braket local simulator
                   device_arn='device_arn',
                   s3_folder='s3_folder')
-        qo.fit()
+        qo.execute()
         results = qo.results()
     ```
 
@@ -74,7 +74,7 @@ class QAOA(QuantumOptimizer):
         np.random.seed(1967)
         self.params = self._default_params() if params is None else params
         self.circuit, self.cost_function = self._prepare()
-        self._fit_called = False
+        self._exec_called = False
 
 
     @staticmethod
@@ -143,7 +143,7 @@ class QAOA(QuantumOptimizer):
             log['iteration'] = i+1
             if verbose:
                 pb.bar(i, log_to_message(log))
-        self._fit_called = True
+        self._exec_called = True
         return self
 
     def results(self, shots = 1024, return_probs=False):
@@ -153,7 +153,7 @@ class QAOA(QuantumOptimizer):
         of vertices comprising the most likely solution and `probs` are the raw solution probabilities.
         """
 
-        if not self._fit_called: raise Exception('The fit method must be called first.')
+        if not self._exec_called: raise Exception('The execute method must be called first.')
 
         dev = self._device(shots=shots)
 
