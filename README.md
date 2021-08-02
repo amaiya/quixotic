@@ -35,7 +35,7 @@ nx.draw(g, with_labels=True, pos=positions, node_size=600)
 ```python
 # approximate a solution using QuantumAnnealer and extract results
 from quixotic.core import QuantumAnnealer
-qo = QuantumAnnealer(g, task='maximum_clique').fit()
+qo = QuantumAnnealer(g, task='maximum_clique').execute()
 nodes = qo.results()
 ```
 

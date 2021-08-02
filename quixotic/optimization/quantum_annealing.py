@@ -79,10 +79,13 @@ class QuantumAnnealer:
 
     @staticmethod
     def supported_tasks():
+        """
+        Prints supported tasks (valid values for the `task` parameter).
+        """
         for task in SUPPORTED_TASKS:
             print(task)
 
-    def fit(self, verbose=1):
+    def execute(self, verbose=1, **kwargs):
         """
         Approximate a solution to given task.
         Simulated Annealing is used when `QuantumAnnealer.local=True`.

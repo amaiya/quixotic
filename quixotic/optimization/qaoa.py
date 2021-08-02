@@ -79,6 +79,9 @@ class QAOA(QuantumOptimizer):
 
     @staticmethod
     def supported_tasks():
+        """
+        Print supported tasks (valid values for the `task` parameter.)
+        """
         for task in SUPPORTED_TASKS:
             print(task)
 
@@ -117,7 +120,7 @@ class QAOA(QuantumOptimizer):
         return circuit, cost_function
 
 
-    def fit(self, iterations=10, verbose=1):
+    def execute(self, iterations=10, verbose=1):
         """
         approximate a solution to given task
         """

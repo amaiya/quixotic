@@ -14,7 +14,7 @@ class QuantumOptimizer(ABC):
     ```
     """
     @abstractmethod
-    def fit(self):
+    def execute(self, **kwargs):
         pass
 
     @abstractmethod

@@ -102,7 +102,7 @@ nb_path: "nbs/99a_examples_quantum_annealing.ipynb"
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">quixotic.core</span> <span class="kn">import</span> <span class="n">QuantumAnnealer</span>
 <span class="n">qo</span> <span class="o">=</span> <span class="n">QuantumAnnealer</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="s1">&#39;maximum_clique&#39;</span><span class="p">)</span>
-<span class="n">qo</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">qo</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
 <span class="n">nodes</span> <span class="o">=</span> <span class="n">qo</span><span class="o">.</span><span class="n">results</span><span class="p">()</span>
 </pre></div>
 
@@ -142,6 +142,44 @@ nb_path: "nbs/99a_examples_quantum_annealing.ipynb"
 >
 </div>
 
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">QuantumAnnealer</span><span class="o">.</span><span class="n">supported_tasks</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>maximum_clique
+minimum_vertex_cover
+minimum_weighted_vertex_cover
+maximum_independent_set
+maximum_weighted_independent_set
+maximum_cut
+weighted_maximum_cut
+traveling_salesperson
+</pre>
+</div>
 </div>
 
 </div>
@@ -206,7 +244,7 @@ nb_path: "nbs/99a_examples_quantum_annealing.ipynb"
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">quixotic.core</span> <span class="kn">import</span> <span class="n">QuantumAnnealer</span>
 <span class="n">qo</span> <span class="o">=</span> <span class="n">QuantumAnnealer</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="s1">&#39;minimum_vertex_cover&#39;</span><span class="p">)</span>
-<span class="n">qo</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">qo</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
 <span class="n">nodes</span> <span class="o">=</span> <span class="n">qo</span><span class="o">.</span><span class="n">results</span><span class="p">()</span>
 </pre></div>
 

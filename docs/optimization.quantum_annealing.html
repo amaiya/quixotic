@@ -78,6 +78,83 @@ nb_path: "nbs/02_optimization.quantum_annealing.ipynb"
 </div>
     {% endraw %}
 
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="QuantumAnnealer.execute" class="doc_header"><code>QuantumAnnealer.execute</code><a href="__main__.py#L84" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>QuantumAnnealer.execute</code>(<strong><code>verbose</code></strong>=<em><code>1</code></em>, <strong>**<code>kwargs</code></strong>)</p>
+</blockquote>
+<p>Approximate a solution to given task.
+Simulated Annealing is used when <a href="/quixotic/optimization.quantum_annealing.html#QuantumAnnealer.local=True"><code>QuantumAnnealer.local=True</code></a>.
+Quantum Annealing is used when <a href="/quixotic/optimization.quantum_annealing.html#QuantumAnnealer.local=False"><code>QuantumAnnealer.local=False</code></a>.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="QuantumAnnealer.results" class="doc_header"><code>QuantumAnnealer.results</code><a href="__main__.py#L119" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>QuantumAnnealer.results</code>(<strong>**<code>kwargs</code></strong>)</p>
+</blockquote>
+<p>Return approximated solution</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="QuantumAnnealer.supported_tasks" class="doc_header"><code>QuantumAnnealer.supported_tasks</code><a href="__main__.py#L76" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>QuantumAnnealer.supported_tasks</code>()</p>
+</blockquote>
+<p>Prints supported tasks (valid values for the <code>task</code> parameter).</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Example:-Minimum-Vertex-Cover-with-Quantum-Annealing">Example: Minimum Vertex Cover with Quantum Annealing<a class="anchor-link" href="#Example:-Minimum-Vertex-Cover-with-Quantum-Annealing"> </a></h3><p>The task is to find the nodes comprising the minimum vertex cover in a graph.  Let's construct a small star graph as input.</p>
@@ -150,10 +227,26 @@ nb_path: "nbs/02_optimization.quantum_annealing.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qo</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">qo</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;__main__.QuantumAnnealer at 0x7f061c45b100&gt;</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
