@@ -6,6 +6,18 @@ Most recent releases are shown at the top. Each release shows:
 - **Changed**: Additional parameters, changes to inputs or outputs, etc
 - **Fixed**: Bug fixes that don't change documented behaviour
 
+## 0.0.4 (TBD)
+
+### New:
+- initial support for LEAP
+
+### Changed
+- `device_arn` and `s3_folder` parameters changed to `aws_device_arn` and `aws_s3_folder`.
+
+### Fixed:
+- N/A
+
+
 ## 0.0.3 (2021-08-05)
 
 ### New:
