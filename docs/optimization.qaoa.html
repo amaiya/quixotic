@@ -40,13 +40,13 @@ nb_path: "nbs/03_optimization.qaoa.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="QAOA" class="doc_header"><code>class</code> <code>QAOA</code><a href="https://github.com/amaiya/quixotic/tree/main/quixotic/optimization/qaoa.py#L20" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>QAOA</code>(<strong><code>g</code></strong>, <strong><code>task</code></strong>=<em><code>None</code></em>, <strong><code>n_layers</code></strong>=<em><code>4</code></em>, <strong><code>constrained</code></strong>=<em><code>False</code></em>, <strong><code>device_name</code></strong>=<em><code>'local'</code></em>, <strong><code>device_arn</code></strong>=<em><code>None</code></em>, <strong><code>s3_folder</code></strong>=<em><code>None</code></em>, <strong><code>params</code></strong>=<em><code>None</code></em>) :: <a href="/quixotic/optimization.base.html#QuantumOptimizer"><code>QuantumOptimizer</code></a></p>
+<h2 id="QAOA" class="doc_header"><code>class</code> <code>QAOA</code><a href="https://github.com/amaiya/quixotic/tree/main/quixotic/optimization/qaoa.py#L21" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>QAOA</code>(<strong><code>g</code></strong>, <strong><code>task</code></strong>=<em><code>None</code></em>, <strong><code>n_layers</code></strong>=<em><code>4</code></em>, <strong><code>constrained</code></strong>=<em><code>False</code></em>, <strong><code>backend</code></strong>=<em><code>'local'</code></em>, <strong><code>device_arn</code></strong>=<em><code>None</code></em>, <strong><code>s3_folder</code></strong>=<em><code>None</code></em>, <strong><code>params</code></strong>=<em><code>None</code></em>) :: <a href="/quixotic/optimization.base.html#QuantumOptimizer"><code>QuantumOptimizer</code></a></p>
 </blockquote>
 <p>quantum-based combinatorial optimization with Amazon Braket using QAOA</p>
 <p>Usage:</p>
 <div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">qo</span> <span class="o">=</span> <span class="n">QAOA</span><span class="p">(</span><span class="n">g</span><span class="p">,</span>
               <span class="n">task</span><span class="o">=</span><span class="s1">&#39;maximum_clique&#39;</span><span class="p">,</span>
-              <span class="n">device_name</span><span class="o">=</span><span class="s1">&#39;braket.local.qubit&#39;</span><span class="p">,</span> <span class="c1"># default braket local simulator</span>
+              <span class="n">backend</span><span class="o">=</span><span class="s1">&#39;aws&#39;</span><span class="p">,</span> <span class="c1"># AWS quantum device</span>
               <span class="n">device_arn</span><span class="o">=</span><span class="s1">&#39;device_arn&#39;</span><span class="p">,</span>
               <span class="n">s3_folder</span><span class="o">=</span><span class="s1">&#39;s3_folder&#39;</span><span class="p">)</span>
     <span class="n">qo</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
@@ -56,8 +56,12 @@ nb_path: "nbs/03_optimization.qaoa.ipynb"
 <ul>
 <li><strong>g</strong> : a networkx Graph object</li>
 <li><strong>task</strong> : one of {'maximum_clique'}</li>
-<li><strong>device_name</strong> : one of {'braket.local.qubit', 'braket.aws.qubit'}</li>
-<li><strong>device_arn</strong> : Device ARN. Only required if name != 'local'.</li>
+<li><strong>backend</strong> : one of {'local', 'aws'}, where<ul>
+<li><code>local</code> will use <code>braket.local.qubit</code>, a local quantum simulator</li>
+<li><code>aws</code> will use <code>braket.aws.qubit</code>, a quantum device managed by Amazon AWS</li>
+</ul>
+</li>
+<li><strong>device_arn</strong> : Device ARN. Only required if backend != 'local'.</li>
 <li><strong>s3_folder</strong> : S3 folder. Only required if name != 'local'.</li>
 <li><strong>n_layers</strong>  : number of layers. default:4</li>
 <li><strong>constrained</strong>  : default:False</li>
@@ -92,7 +96,7 @@ nb_path: "nbs/03_optimization.qaoa.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="QAOA.execute" class="doc_header"><code>QAOA.execute</code><a href="__main__.py#L119" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>QAOA.execute</code>(<strong><code>iterations</code></strong>=<em><code>10</code></em>, <strong><code>verbose</code></strong>=<em><code>1</code></em>)</p>
+<h4 id="QAOA.execute" class="doc_header"><code>QAOA.execute</code><a href="__main__.py#L122" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>QAOA.execute</code>(<strong><code>iterations</code></strong>=<em><code>10</code></em>, <strong><code>verbose</code></strong>=<em><code>1</code></em>)</p>
 </blockquote>
 <p>approximate a solution to given task</p>
 
@@ -117,7 +121,7 @@ nb_path: "nbs/03_optimization.qaoa.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="QAOA.results" class="doc_header"><code>QAOA.results</code><a href="__main__.py#L145" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>QAOA.results</code>(<strong><code>shots</code></strong>=<em><code>1024</code></em>, <strong><code>return_probs</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="QAOA.results" class="doc_header"><code>QAOA.results</code><a href="__main__.py#L148" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>QAOA.results</code>(<strong><code>shots</code></strong>=<em><code>1024</code></em>, <strong><code>return_probs</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Sample and return results.
 Returns a tuple of the form: <code>(nodes, probs)</code>, where <code>nodes</code> are the list
@@ -144,7 +148,7 @@ of vertices comprising the most likely solution and <code>probs</code> are the r
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="QAOA.plot_samples" class="doc_header"><code>QAOA.plot_samples</code><a href="__main__.py#L181" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>QAOA.plot_samples</code>(<strong><code>probs</code></strong>)</p>
+<h4 id="QAOA.plot_samples" class="doc_header"><code>QAOA.plot_samples</code><a href="__main__.py#L184" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>QAOA.plot_samples</code>(<strong><code>probs</code></strong>)</p>
 </blockquote>
 <p>Plot sample for toy problems for testing purposes.</p>
 
@@ -169,7 +173,7 @@ of vertices comprising the most likely solution and <code>probs</code> are the r
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="QAOA.supported_tasks" class="doc_header"><code>QAOA.supported_tasks</code><a href="__main__.py#L76" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>QAOA.supported_tasks</code>()</p>
+<h4 id="QAOA.supported_tasks" class="doc_header"><code>QAOA.supported_tasks</code><a href="__main__.py#L78" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>QAOA.supported_tasks</code>()</p>
 </blockquote>
 <p>Print supported tasks (valid values for the <code>task</code> parameter.)</p>
 
@@ -281,7 +285,7 @@ of vertices comprising the most likely solution and <code>probs</code> are the r
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;__main__.QAOA at 0x7f0ed6f1ea90&gt;</pre>
+<pre>&lt;__main__.QAOA at 0x7f80ac213c70&gt;</pre>
 </div>
 
 </div>

@@ -168,15 +168,31 @@ nb_path: "nbs/index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="To-execute-on-a-Quantum-Computer:">To execute on a Quantum Computer:<a class="anchor-link" href="#To-execute-on-a-Quantum-Computer:"> </a></h4><p>By default, <strong>Quixotic</strong> uses a local solver or simulator (e.g., quantum simulator, simulated annealing), which allows you to easily run and test on your CPU-based laptop.  To run on an actual managed quantum computer hosted on Amazon Braket, simply set the <code>device_arn</code> and <code>s3_folder</code> parameters.  For <a href="/quixotic/optimization.quantum_annealing.html#QuantumAnnealer"><code>QuantumAnnealer</code></a>,  the <code>device_arn</code> should be a D-Wave QPU:</p>
+<h2 id="How-to-Execute-on-a-Quantum-Computer:">How to Execute on a Quantum Computer:<a class="anchor-link" href="#How-to-Execute-on-a-Quantum-Computer:"> </a></h2><p>By default, <strong>Quixotic</strong> uses a local solver or simulator (e.g., quantum simulator, simulated annealing), which allows you to easily run and test on your CPU-based laptop.  To run on an actual managed quantum computer hosted on Amazon Braket, simply set the backend to <code>aws</code> and supply the <code>device_arn</code> and <code>s3_folder</code> parameters.  Here is an example of using the <a href="/quixotic/optimization.quantum_annealing.html#QuantumAnnealer"><code>QuantumAnnealer</code></a> on a QPU managed by Amazon Braket:</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">quixotic.core</span> <span class="kn">import</span> <span class="n">QuantumAnnealer</span>
 <span class="n">qo</span> <span class="o">=</span> <span class="n">QuantumAnnealer</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="s1">&#39;maximum_clique&#39;</span><span class="p">,</span>
                      <span class="n">backend</span><span class="o">=</span><span class="s1">&#39;aws&#39;</span><span class="p">,</span>                                               <span class="c1"># Amazon AWS as backend</span>
                      <span class="n">device_arn</span><span class="o">=</span><span class="s1">&#39;arn:aws:braket:::device/qpu/d-wave/DW_2000Q_6&#39;</span><span class="p">,</span>  <span class="c1"># D-Wave QPU</span>
                      <span class="n">s3_folder</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;amazon-braket-Your-Bucket-Name&quot;</span><span class="p">,</span> <span class="s2">&quot;Your-Folder-Name&quot;</span><span class="p">))</span>
 <span class="n">qo</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>  <span class="c1"># executes algorithm on quantum hardware managed by Amazon Braket</span>
-<span class="n">nodes</span> <span class="o">=</span> <span class="n">qo</span><span class="o">.</span><span class="n">results</span><span class="p">()</span>
+<span class="n">solution_nodes</span> <span class="o">=</span> <span class="n">qo</span><span class="o">.</span><span class="n">results</span><span class="p">()</span>
 </pre></div>
+<p>For the <a href="/quixotic/optimization.quantum_annealing.html#QuantumAnnealer"><code>QuantumAnnealer</code></a>, you can also use D-Wave LEAP as a backend by specifying <code>backend='dwave'</code>.  However, to use a managed quantum computer, you'll need to first create an account with one of the backend providers using the instructions below:</p>
+<h4 id="Setting-up-an-Amazon-Braket-Account">Setting up an Amazon Braket Account<a class="anchor-link" href="#Setting-up-an-Amazon-Braket-Account"> </a></h4><ol>
+<li>Create an AWS account and activate <a href="https://aws.amazon.com/braket/">Amazon Braket</a>.</li>
+<li>During the onboarding process in the previous step, you will generate an Amazon Braket bucket of the form <code>amazon-braket-XXXXXX</code>.  Make note of this.</li>
+<li>If running <strong>Quixotic</strong> on your laptop and using a remote quantum device, you'll have to <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html">configure and store  your AWS credentials locally</a>. If using a managed notebook within Amazon Braket itself, you can skip this step.</li>
+<li>Set <code>backend='aws'</code> in addition to the <code>device_arn</code> and <code>s3_folder</code> parameters when executing either the <a href="/quixotic/optimization.quantum_annealing.html#QuantumAnnealer"><code>QuantumAnnealer</code></a> or the <a href="/quixotic/optimization.qaoa.html#QAOA"><code>QAOA</code></a> algorithm.</li>
+</ol>
+<h4 id="Setting-up-a-D-Wave-LEAP-Account">Setting up a D-Wave LEAP Account<a class="anchor-link" href="#Setting-up-a-D-Wave-LEAP-Account"> </a></h4><p>The <a href="/quixotic/optimization.quantum_annealing.html#QuantumAnnealer"><code>QuantumAnnealer</code></a> can also use D-Wave LEAP as a backend instead of Amazon Braket, if following the steps below.  (LEAP is D-Wave's cloud-based quantum service.)</p>
+<ol>
+<li>Create a LEAP account and make note of the API Token assigned to you.</li>
+<li>After <strong>Quixotic</strong> is installed, run the command: <code>dwave config create</code>.  Copy and paste your API token when prompted and select defaults for everything else.</li>
+<li>When using <strong>Quixotic</strong> <a href="/quixotic/optimization.quantum_annealing.html#QuantumAnnealer"><code>QuantumAnnealer</code></a>, set <code>backend='dwave'</code> and run the code below to use the default solver:<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">quixotic.core</span> <span class="kn">import</span> <span class="n">QuantumAnnealer</span>
+<span class="n">solution_nodes</span> <span class="o">=</span> <span class="n">QuantumAnnealer</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="s1">&#39;maximum_clique&#39;</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s1">&#39;dwave&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">results</span><span class="p">()</span>
+</pre></div>
+</li>
+</ol>
 
 </div>
 </div>
