@@ -75,6 +75,7 @@ The `QuantumAnnealer` can also use D-Wave LEAP as a backend instead of Amazon Br
 2. After **Quixotic** is installed, run the command: `dwave config create`.  Copy and paste your API token when prompted and select defaults for everything else.
 3. When using `QuantumAnnealer` in **Quixotic**, set `backend='dwave'` and run the code below to use the default solver:
 ```python
+# Executing on D-Wave quantum backend
 from quixotic.core import QuantumAnnealer
 solution_nodes = QuantumAnnealer(g, task='maximum_clique', backend='dwave').execute().results()
 ```
