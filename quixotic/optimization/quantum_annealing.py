@@ -66,7 +66,7 @@ class QuantumAnnealer:
         # input vars
         self.g = g
         self.task = task
-        self.local = device_arn is not None and s3_folder is not None
+        self.local = device_arn is None or s3_folder is None
         self.device_arn = device_arn
         self.s3_folder = s3_folder
 
