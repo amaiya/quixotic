@@ -106,7 +106,7 @@ class QuantumAnnealer:
                 import neal
                 sampler = neal.SimulatedAnnealingSampler()
         else:
-            bracket_sampler = BraketSampler(self.s3_folder, self.device_arn)
+            braket_sampler = BraketSampler(self.s3_folder, self.device_arn)
             sampler = EmbeddingComposite(braket_sampler)
             if verbose: print('Executing on Amazon Braket with results stored in %s.' % (self.s3_folder))
 
