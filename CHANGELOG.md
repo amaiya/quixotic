@@ -6,13 +6,13 @@ Most recent releases are shown at the top. Each release shows:
 - **Changed**: Additional parameters, changes to inputs or outputs, etc
 - **Fixed**: Bug fixes that don't change documented behaviour
 
-## 0.0.3 (TBD)
+## 0.0.3 (2021-08-05)
 
 ### New:
 - N/A
 
 ### Changed
-- removed `local` parameter from `QuantumAnnealer`
+- removed `local` constructor parameter from `QuantumAnnealer`
 
 ### Fixed:
 - fixed typo in BraketSampler
