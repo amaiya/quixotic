@@ -55,7 +55,8 @@ nb_path: "nbs/02_optimization.quantum_annealing.ipynb"
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><strong>g</strong> : a networkx Graph object</li>
-<li><strong>task</strong> : one of {'maximum_clique'}</li>
+<li><strong>task</strong> : task as <code>str</code>.  Invoke <code>supported_tasks</code> static method to see options.</li>
+<li><strong>local</strong> : If True, use local solver.</li>
 <li><strong>device_name</strong> : one of {'braket.local.qubit', 'braket.aws.qubit'}</li>
 <li><strong>device_arn</strong> : Device ARN. Only required if name != 'local'.</li>
 <li><strong>s3_folder</strong> : S3 folder. Only required if name != 'local'.</li>
@@ -89,7 +90,7 @@ nb_path: "nbs/02_optimization.quantum_annealing.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="QuantumAnnealer.execute" class="doc_header"><code>QuantumAnnealer.execute</code><a href="__main__.py#L84" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>QuantumAnnealer.execute</code>(<strong><code>verbose</code></strong>=<em><code>1</code></em>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="QuantumAnnealer.execute" class="doc_header"><code>QuantumAnnealer.execute</code><a href="__main__.py#L86" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>QuantumAnnealer.execute</code>(<strong><code>verbose</code></strong>=<em><code>1</code></em>, <strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 <p>Approximate a solution to given task.
 Simulated Annealing is used when <a href="/quixotic/optimization.quantum_annealing.html#QuantumAnnealer.local=True"><code>QuantumAnnealer.local=True</code></a>.
@@ -116,7 +117,7 @@ Quantum Annealing is used when <a href="/quixotic/optimization.quantum_annealing
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="QuantumAnnealer.results" class="doc_header"><code>QuantumAnnealer.results</code><a href="__main__.py#L119" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>QuantumAnnealer.results</code>(<strong>**<code>kwargs</code></strong>)</p>
+<h4 id="QuantumAnnealer.results" class="doc_header"><code>QuantumAnnealer.results</code><a href="__main__.py#L121" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>QuantumAnnealer.results</code>(<strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 <p>Return approximated solution</p>
 
@@ -141,7 +142,7 @@ Quantum Annealing is used when <a href="/quixotic/optimization.quantum_annealing
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="QuantumAnnealer.supported_tasks" class="doc_header"><code>QuantumAnnealer.supported_tasks</code><a href="__main__.py#L76" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>QuantumAnnealer.supported_tasks</code>()</p>
+<h4 id="QuantumAnnealer.supported_tasks" class="doc_header"><code>QuantumAnnealer.supported_tasks</code><a href="__main__.py#L78" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>QuantumAnnealer.supported_tasks</code>()</p>
 </blockquote>
 <p>Prints supported tasks (valid values for the <code>task</code> parameter).</p>
 

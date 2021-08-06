@@ -46,13 +46,15 @@ class QuantumAnnealer:
     **Parameters:**
 
     * **g** : a networkx Graph object
-    * **task** : one of {'maximum_clique'}
+    * **task** : task as `str`.  Invoke `supported_tasks` static method to see options.
+    * **local** : If True, use local solver.
     * **device_name** : one of {'braket.local.qubit', 'braket.aws.qubit'}
     * **device_arn** : Device ARN. Only required if name != 'local'.
     * **s3_folder** : S3 folder. Only required if name != 'local'.
     """
     def __init__(self, g, task=None,
-                 local=True, device_arn=None, s3_folder=None):
+                 local=True, device_arn=None, s3_folder=None,
+                 ):
         """
         constructor
         """
