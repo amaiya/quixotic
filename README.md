@@ -51,7 +51,7 @@ nx.draw(sub, pos=positions, node_color="r", edge_color="r", node_size=600)
 
 
 ## How to Execute on a Quantum Computer:
-By default, **Quixotic** uses a local solver or simulator (e.g., quantum simulator, simulated annealing), which allows you to easily run and test on your CPU-based laptop.  To run on an actual managed quantum computer hosted on Amazon Braket, simply set the backend to `aws` and supply the `device_arn` and `s3_folder` parameters.  Here is an example of using the `QuantumAnnealer` on a QPU managed by Amazon Braket:
+By default, **Quixotic** uses a local solver or simulator (e.g., quantum simulator, simulated annealing), which allows you to easily run and test on your CPU-based laptop.  To run on an actual managed quantum computer hosted on Amazon Braket, simply set the backend to `aws` and supply the `device_arn` and `s3_folder` parameters.  Here is an example of using the `QuantumAnnealer` on a quantum computer managed by Amazon Braket:
 ```python
 from quixotic.core import QuantumAnnealer
 qo = QuantumAnnealer(g, task='maximum_clique',
