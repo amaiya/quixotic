@@ -10,6 +10,8 @@ import warnings
 # dwave imports
 import dwave_networkx as dnx
 from dwave.system.composites import EmbeddingComposite
+from braket.ocean_plugin import BraketSampler, BraketDWaveSampler
+
 
 # local imports
 from .base import QuantumOptimizer, DEFAULT_LOCAL_SIMULATOR
