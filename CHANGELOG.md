@@ -15,7 +15,7 @@ Most recent releases are shown at the top. Each release shows:
 - N/A
 
 ### Fixed:
-- N/A
+- fixed import error in `QuantumAnnealer`
 
 
 ## 0.0.2 (2021-08-02)
