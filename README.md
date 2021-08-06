@@ -55,8 +55,9 @@ By default, **Quixotic** uses a local solver or simulator (e.g., quantum simulat
 ```python
 from quixotic.core import QuantumAnnealer
 qo = QuantumAnnealer(g, task='maximum_clique',
-                    device_arn='arn:aws:braket:::device/qpu/d-wave/DW_2000Q_6',  # D-Wave QPU
-                    s3_folder = ("amazon-braket-Your-Bucket-Name", "Your-Folder-Name"))
+                     backend='aws',                                               # Amazon AWS as backend
+                     device_arn='arn:aws:braket:::device/qpu/d-wave/DW_2000Q_6',  # D-Wave QPU
+                     s3_folder = ("amazon-braket-Your-Bucket-Name", "Your-Folder-Name"))
 qo.execute()  # executes algorithm on quantum hardware managed by Amazon Braket
 nodes = qo.results()
 ```

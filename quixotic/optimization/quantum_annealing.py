@@ -42,8 +42,8 @@ class QuantumAnnealer:
     ```python
     >>> qo = QuantumAnnealer(g,
                             task='maximum_clique',
-                            aws_device_arn='device_arn', # optional
-                            aws_s3_folder='s3_folder')   # optional
+                            device_arn='device_arn', # optional
+                            s3_folder='s3_folder')   # optional
         qo.execute()
         results = qo.results()
     ```
@@ -54,14 +54,14 @@ class QuantumAnnealer:
     * **task** : task as `str`.  Invoke `supported_tasks` static method to see options.
     * **backend** : One of `{'local', 'aws', 'dwave'}` where:
                      - `local`: use a local solver (simulated annealing on your laptop)
-                     - `aws`: use Amazon Braket (`aws_device_arn` and `aws_s3_folder` args required)
+                     - `aws`: use Amazon Braket (`device_arn` and `3_folder` args required)
                      - `dwave`: use D-Wave Leap System default solver as specified in `<home_directory/.config/dwave/dwave.conf
 
-    * **aws_device_arn** : Device ARN. Only required if not running locally.
-    * **aws_s3_folder** : S3 folder. Only required if not running locally.
+    * **device_arn** : Device ARN. Only required if not running locally.
+    * **s3_folder** : S3 folder. Only required if not running locally.
     """
     def __init__(self, g, task=None, backend=BE_LOCAL,
-                 aws_device_arn=None, aws_s3_folder=None,
+                 device_arn=None, s3_folder=None,
                  ):
         """
         constructor
@@ -70,19 +70,19 @@ class QuantumAnnealer:
         if task not in SUPPORTED_TASKS: raise ValueError(f'task {task} is not supported. ' +\
                                                          f'Supported tasks: {list(SUPPORTED_TASKS.keys())}')
         if not isinstance(g, nx.Graph): raise ValueError('g must be instance of networkx.Graph')
-        if (aws_device_arn is not None and aws_s3_folder is None) or\
-           (aws_device_arn is None and aws_s3_folder is not None):
+        if (device_arn is not None and s3_folder is None) or\
+           (device_arn is None and s3_folder is not None):
             raise ValueError('If one of device_arn or s3_folder is supplied, then both must be supplied.')
-        if backend != BE_AWS and aws_device_arn is not None:
-            warnings.warn('Switching backend to "aws" because aws_device_arn and aws_s3_folder were supplied.')
+        if backend != BE_AWS and device_arn is not None:
+            warnings.warn('Switching backend to "aws" because device_arn and s3_folder were supplied.')
 
 
         # input vars
         self.g = g
         self.task = task
         self.backend = backend
-        self.device_arn = aws_device_arn
-        self.s3_folder = aws_s3_folder
+        self.device_arn = device_arn
+        self.s3_folder = s3_folder
 
 
         # computed vars
