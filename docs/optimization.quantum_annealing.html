@@ -40,25 +40,30 @@ nb_path: "nbs/02_optimization.quantum_annealing.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="QuantumAnnealer" class="doc_header"><code>class</code> <code>QuantumAnnealer</code><a href="https://github.com/amaiya/quixotic/tree/main/quixotic/optimization/quantum_annealing.py#L29" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>QuantumAnnealer</code>(<strong><code>g</code></strong>, <strong><code>task</code></strong>=<em><code>None</code></em>, <strong><code>local</code></strong>=<em><code>True</code></em>, <strong><code>device_arn</code></strong>=<em><code>None</code></em>, <strong><code>s3_folder</code></strong>=<em><code>None</code></em>)</p>
+<h2 id="QuantumAnnealer" class="doc_header"><code>class</code> <code>QuantumAnnealer</code><a href="https://github.com/amaiya/quixotic/tree/main/quixotic/optimization/quantum_annealing.py#L35" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>QuantumAnnealer</code>(<strong><code>g</code></strong>, <strong><code>task</code></strong>=<em><code>None</code></em>, <strong><code>backend</code></strong>=<em><code>'local'</code></em>, <strong><code>aws_device_arn</code></strong>=<em><code>None</code></em>, <strong><code>aws_s3_folder</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>quantum-based combinatorial optimization with Amazon Braket</p>
 <p>Usage:</p>
 <div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">qo</span> <span class="o">=</span> <span class="n">QuantumAnnealer</span><span class="p">(</span><span class="n">g</span><span class="p">,</span>
                         <span class="n">task</span><span class="o">=</span><span class="s1">&#39;maximum_clique&#39;</span><span class="p">,</span>
-                        <span class="n">device_name</span><span class="o">=</span><span class="s1">&#39;local&#39;</span><span class="p">,</span>     <span class="c1"># uses local simulator solver</span>
-                        <span class="n">device_arn</span><span class="o">=</span><span class="s1">&#39;device_arn&#39;</span><span class="p">,</span> <span class="c1"># only needed if not local</span>
-                        <span class="n">s3_folder</span><span class="o">=</span><span class="s1">&#39;s3_folder&#39;</span><span class="p">)</span>   <span class="c1"># only needed if not local</span>
-    <span class="n">qo</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+                        <span class="n">aws_device_arn</span><span class="o">=</span><span class="s1">&#39;device_arn&#39;</span><span class="p">,</span> <span class="c1"># optional</span>
+                        <span class="n">aws_s3_folder</span><span class="o">=</span><span class="s1">&#39;s3_folder&#39;</span><span class="p">)</span>   <span class="c1"># optional</span>
+    <span class="n">qo</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
     <span class="n">results</span> <span class="o">=</span> <span class="n">qo</span><span class="o">.</span><span class="n">results</span><span class="p">()</span>
 </pre></div>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><strong>g</strong> : a networkx Graph object</li>
-<li><strong>task</strong> : one of {'maximum_clique'}</li>
-<li><strong>device_name</strong> : one of {'braket.local.qubit', 'braket.aws.qubit'}</li>
-<li><strong>device_arn</strong> : Device ARN. Only required if name != 'local'.</li>
-<li><strong>s3_folder</strong> : S3 folder. Only required if name != 'local'.</li>
+<li><strong>task</strong> : task as <code>str</code>.  Invoke <code>supported_tasks</code> static method to see options.</li>
+<li><p><strong>backend</strong> : One of <code>{'local', 'aws', 'dwave'}</code> where:</p>
+
+<pre><code>           - `local`: use a local solver (simulated annealing on your laptop)
+           - `aws`: use Amazon Braket (`aws_device_arn` and `aws_s3_folder` args required)
+           - `dwave`: use D-Wave Leap System default solver as specified in `&lt;home_directory/.config/dwave/dwave.conf</code></pre>
+</li>
+<li><p><strong>aws_device_arn</strong> : Device ARN. Only required if not running locally.</p>
+</li>
+<li><strong>aws_s3_folder</strong> : S3 folder. Only required if not running locally.</li>
 </ul>
 
 </div>
