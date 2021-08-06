@@ -15,6 +15,7 @@ Most recent releases are shown at the top. Each release shows:
 - N/A
 
 ### Fixed:
+- fixed typo in BraketSampler
 - correctly set `local=False` when `device_arn` and `s3_folder` is supplied
 - fixed import error in `QuantumAnnealer`
 
