@@ -12,7 +12,7 @@ Most recent releases are shown at the top. Each release shows:
 - N/A
 
 ### Changed
-- N/A
+- removed `local` parameter from `QuantumAnnealer`
 
 ### Fixed:
 - fixed typo in BraketSampler
