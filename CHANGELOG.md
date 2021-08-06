@@ -12,7 +12,7 @@ Most recent releases are shown at the top. Each release shows:
 - initial support for LEAP
 
 ### Changed
-- `device_arn` and `s3_folder` parameters changed to `aws_device_arn` and `aws_s3_folder`.
+- Added `backend` parameter to `QuantumAnnealer`
 
 ### Fixed:
 - N/A
