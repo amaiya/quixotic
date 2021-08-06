@@ -108,7 +108,7 @@ class QuantumAnnealer:
         else:
             braket_sampler = BraketSampler(self.s3_folder, self.device_arn)
             sampler = EmbeddingComposite(braket_sampler)
-            if verbose: print('Executing on Amazon Braket with results stored in %s.' % (self.s3_folder))
+            if verbose: print('Executing on Amazon Braket with results stored in (%s,%s).' % (self.s3_folder))
 
 
         # generate approximation
