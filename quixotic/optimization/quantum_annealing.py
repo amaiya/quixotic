@@ -67,6 +67,7 @@ class QuantumAnnealer:
             raise ValueError('device_arn and s3_folder are required if using managed AWS device')
         if local and (device_arn is not None or s3_folder is not None):
             warnings.warn('local=True is being ignored since device_arn and s3_folder exist. ')
+            local = False
         if not isinstance(g, nx.Graph): raise ValueError('g must be instance of networkx.Graph')
 
         # input vars
@@ -107,6 +108,8 @@ class QuantumAnnealer:
         else:
             bracket_sampler = BraketSampler(self.s3_folder, self.device_arn)
             sampler = EmbeddingComposite(braket_sampler)
+            if verbose: print('Executing on Amazon Braket with results stored in %s.' % (self.s3_folder))
+
 
         # generate approximation
         kwargs = {}
