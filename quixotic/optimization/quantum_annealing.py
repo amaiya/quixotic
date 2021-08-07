@@ -75,6 +75,7 @@ class QuantumAnnealer:
             raise ValueError('If one of device_arn or s3_folder is supplied, then both must be supplied.')
         if backend != BE_AWS and device_arn is not None:
             warnings.warn('Switching backend to "aws" because device_arn and s3_folder were supplied.')
+            backend = 'aws'
 
 
         # input vars
@@ -115,6 +116,8 @@ class QuantumAnnealer:
             else:
                 import neal
                 sampler = neal.SimulatedAnnealingSampler()
+            if verbose: print('Executing locally.')
+
         elif self.backend == BE_AWS:
             braket_sampler = BraketSampler(self.s3_folder, self.device_arn)
             sampler = EmbeddingComposite(braket_sampler)
