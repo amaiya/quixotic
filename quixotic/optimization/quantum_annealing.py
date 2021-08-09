@@ -11,6 +11,7 @@ import warnings
 import dwave_networkx as dnx
 from dwave.system import EmbeddingComposite, DWaveSampler
 from braket.ocean_plugin import BraketSampler, BraketDWaveSampler
+from dimod import BinaryQuadraticModel
 
 
 # local imports
@@ -24,6 +25,7 @@ SUPPORTED_TASKS = {'maximum_clique': dnx.maximum_clique,
                    'maximum_weighted_independent_set' : dnx.maximum_weighted_independent_set,
                    'maximum_cut' : dnx.maximum_cut,
                    'weighted_maximum_cut' : dnx.weighted_maximum_cut,
+                   'structural_imbalance' : dnx.structural_imbalance,
                    'traveling_salesperson' : dnx.traveling_salesperson
                   }
 
@@ -50,8 +52,9 @@ class QuantumAnnealer:
 
     **Parameters:**
 
-    * **g** : a networkx Graph object
+    * **graph** : a networkx Graph object
     * **task** : task as `str`.  Invoke `supported_tasks` static method to see options.
+    * **bqm** : A `dimod.BinaryQuadraticModel`. If bqm supplied, then graph and task parameters are not needed.
     * **backend** : One of `{'local', 'aws', 'dwave'}` where:
                      - `local`: use a local solver (simulated annealing on your laptop)
                      - `aws`: use Amazon Braket (`device_arn` and `3_folder` args required)
@@ -60,16 +63,25 @@ class QuantumAnnealer:
     * **device_arn** : Device ARN. Only required if not running locally.
     * **s3_folder** : S3 folder. Only required if not running locally.
     """
-    def __init__(self, g, task=None, backend=BE_LOCAL,
+    def __init__(self, graph=None, task=None, bqm=None, backend=BE_LOCAL,
                  device_arn=None, s3_folder=None,
                  ):
         """
         constructor
         """
         # error checks
-        if task not in SUPPORTED_TASKS: raise ValueError(f'task {task} is not supported. ' +\
-                                                         f'Supported tasks: {list(SUPPORTED_TASKS.keys())}')
-        if not isinstance(g, nx.Graph): raise ValueError('g must be instance of networkx.Graph')
+        if (graph is None or task is None) and bqm is None:
+            raise ValueError('Either graph and task params must be supplied or bqm must be supplied.')
+        if (graph is not None or task is not None) and bqm is not None:
+            raise ValueError('bqm parameter is mutually exclusive with graph and task params.')
+        if bqm is not None and not isinstance(bqm, BinaryQuadraticModel):
+            raise ValueError('bqm must be an instance of dimod.BinaryQuadraticModel')
+
+        if bqm is None and task not in SUPPORTED_TASKS:
+            raise ValueError(f'task {task} is not supported. ' +\
+                             f'Supported tasks: {list(SUPPORTED_TASKS.keys())}')
+        if bqm is None and not isinstance(graph, nx.Graph):
+            raise ValueError('g must be instance of networkx.Graph')
         if (device_arn is not None and s3_folder is None) or\
            (device_arn is None and s3_folder is not None):
             raise ValueError('If one of device_arn or s3_folder is supplied, then both must be supplied.')
@@ -79,8 +91,9 @@ class QuantumAnnealer:
 
 
         # input vars
-        self.g = g
+        self.g = graph
         self.task = task
+        self.bqm = bqm
         self.backend = backend
         self.device_arn = device_arn
         self.s3_folder = s3_folder
@@ -110,7 +123,7 @@ class QuantumAnnealer:
 
         # setup sampler
         if self.backend == BE_LOCAL:
-            if self.g.number_of_nodes() < 18:
+            if self.g is not None and self.g.number_of_nodes() < 18:
                 from dimod.reference.samplers import ExactSolver
                 sampler = ExactSolver()
             else:
@@ -131,18 +144,31 @@ class QuantumAnnealer:
 
         # generate approximation
         kwargs = {}
-        if 'weighted' in 'self.task': kwargs['weight'] = 'weight'
-        apx_fn = SUPPORTED_TASKS[self.task]
-        if self.is_local():
-            result = apx_fn(self.g, sampler, **kwargs)
+        if self.task is not None and 'weighted' in self.task: kwargs['weight'] = 'weight'
+
+        if self.bqm is None:
+            apx_fn = SUPPORTED_TASKS[self.task]
+            if self.is_local():
+                result = apx_fn(self.g, sampler, **kwargs)
+            else:
+                if self.backend == BE_AWS: kwargs['resultFormat'] = 'HISTOGRAM'
+                result = apx_fn(self.g, sampler, **kwargs)
         else:
-            if self.backend == BE_AWS: kwargs['resultFormat'] = 'HISTOGRAM'
-            result = apx_fn(self.g, sampler, **kwargs)
+            # use the sampler to find low energy states
+            response = sampler.sample(self.bqm, **kwargs)
+
+            # we want the lowest energy sample
+            sample = next(iter(response))
+
+            # nodes that are spin up or true are exactly the ones in S.
+            result = [node for node in sample if sample[node] > 0]
+
 
 
         self._last_result = result
         self._exec_called = True
         return self
+
 
     def results(self, **kwargs):
         """

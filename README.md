@@ -8,7 +8,8 @@
 ## Features
 - Easy-to-apply quantum algorithms for a number of combinatorial optimization problems using [Quantum Annealing](https://en.wikipedia.org/wiki/Quantum_annealing) and [QAOA](https://arxiv.org/abs/1411.4028).
 - Includes out-of-the-box support for various optimization problems like maximum clique and minimum vertex cover.
-- Supports execution using both local simulation on your laptop and managed quantum computers on [Amazon Braket](https://aws.amazon.com/braket/).
+- Supports custom problem formulations as [QUBOs](https://leeds-faculty.colorado.edu/glover/511%20-%20QUBO%20Tutorial%20-%20updated%20version%20-%20May%204,%202019.pdf).
+- Simple-to-use execution of algorithms using both local simulation on your laptop and managed quantum computers on [Amazon Braket](https://aws.amazon.com/braket/) or the D-Wave LEAP service.
 
 ## Install
 
@@ -38,6 +39,9 @@ from quixotic.core import QuantumAnnealer
 qo = QuantumAnnealer(g, task='maximum_clique').execute()
 nodes = qo.results()
 ```
+
+    Executing locally.
+
 
 ```python
 # plot nodes comprising the solution
