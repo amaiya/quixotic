@@ -5,6 +5,10 @@
 ## What is Quixotic?
 > Quixotic is a Python library for simple-to-use, low-code quantum computing.
 
+<p align="center">
+<img src="https://raw.githubusercontent.com/amaiya/quixotic/develop/example.png" width="200" style="max-width: 200px">
+</p>
+
 ## Features
 - Easy-to-apply quantum algorithms for a number of combinatorial optimization problems using [Quantum Annealing](https://en.wikipedia.org/wiki/Quantum_annealing) and [QAOA](https://arxiv.org/abs/1411.4028).
 - Includes out-of-the-box support for various optimization problems like maximum clique and minimum vertex cover.
@@ -30,7 +34,7 @@ nx.draw(g, with_labels=True, pos=positions, node_size=600)
 ```
 
 
-![png](docs/images/output_5_0.png)
+![png](docs/images/output_6_0.png)
 
 
 ```python
@@ -51,7 +55,7 @@ nx.draw(sub, pos=positions, node_color="r", edge_color="r", node_size=600)
 ```
 
 
-![png](docs/images/output_7_0.png)
+![png](docs/images/output_8_0.png)
 
 
 ## How to Execute on a Quantum Computer:
