@@ -30,7 +30,7 @@ import networkx as nx
 seed = 1967
 g = nx.erdos_renyi_graph(6, p=0.5, seed=seed)
 positions = nx.spring_layout(g, seed=seed)
-nx.draw(g, with_labels=True, pos=positions, node_size=600)
+nx.draw(g, with_labels=True, pos=positions)
 ```
 
 
@@ -50,8 +50,8 @@ nodes = qo.results()
 ```python
 # plot nodes comprising the solution
 sub = g.subgraph(nodes)
-nx.draw(g, pos=positions, with_labels=True, node_size=600)
-nx.draw(sub, pos=positions, node_color="r", edge_color="r", node_size=600)
+nx.draw(g, pos=positions, with_labels=True)
+nx.draw(sub, pos=positions, node_color="r", edge_color="r")
 ```
 
 

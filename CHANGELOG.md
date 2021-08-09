@@ -6,6 +6,18 @@ Most recent releases are shown at the top. Each release shows:
 - **Changed**: Additional parameters, changes to inputs or outputs, etc
 - **Fixed**: Bug fixes that don't change documented behaviour
 
+## 0.0.5 (2021-08-09)
+
+### New:
+- Support for accepting problems expressed as binary quadratic models or QUBOs.
+
+### Changed
+- N/A
+
+### Fixed:
+- fixed detection of `weights` on edges for weighted problems
+
+
 ## 0.0.4 (2021-08-06)
 
 ### New:
