@@ -2,12 +2,12 @@
 
 
 
-## What is Quixotic?
-> Quixotic is a Python library for simple-to-use, low-code quantum computing.
-
 <p align="center">
 <img src="https://raw.githubusercontent.com/amaiya/quixotic/develop/example.png" width="800" style="max-width: 800px">
 </p>
+
+## What is Quixotic?
+> Quixotic is a Python library for simple-to-use, low-code quantum computing.
 
 ## Features
 - Easy-to-apply quantum algorithms for a number of combinatorial optimization problems using [Quantum Annealing](https://en.wikipedia.org/wiki/Quantum_annealing) and [QAOA](https://arxiv.org/abs/1411.4028).
