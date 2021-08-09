@@ -6,7 +6,7 @@
 > Quixotic is a Python library for simple-to-use, low-code quantum computing.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/amaiya/quixotic/develop/example.png" width="200" style="max-width: 200px">
+<img src="https://raw.githubusercontent.com/amaiya/quixotic/develop/example.png" width="800" style="max-width: 800px">
 </p>
 
 ## Features
