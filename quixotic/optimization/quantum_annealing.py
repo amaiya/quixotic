@@ -123,7 +123,9 @@ class QuantumAnnealer:
 
         # setup sampler
         if self.backend == BE_LOCAL:
-            if self.g is not None and self.g.number_of_nodes() < 18:
+            #if self.g is not None and self.g.number_of_nodes() < 18:
+            if self.g is not None and self.g.number_of_nodes() < 20:
+
                 from dimod.reference.samplers import ExactSolver
                 sampler = ExactSolver()
             else:
