@@ -1,6 +1,30 @@
-,source,target,event_description,event_id,event_year,event_type,sign
-0,1,661,Jaysh al Sanadeed began targeting the Islamic State.,1865,2011,riv,-1
-1,1,523,Ahrar al-Sham and the Islamic State coordinated an attack on Alawite villages in the Latakia governorate that killed 190 civilians.,1821,2013,all,1
-2,1,655,"Ahrar al-Sham, the Islamic State, and The Kurdish Islamic Front began targeting the YPG.",1855,2013,riv,-1
-3,1,533,"Jaysh al-Islam has opposed the Islamic State (IS) since 2013, and referred to IS as “enemy number one of the Syrian revolution.”",1871,2013,riv,-1
-4,1,493,"Jabhat al-Nusra (Al-Nusra) received funding and personnel from the Islamic State (which at the time operated as Al Qaeda in Iraq, or AQI) that helped establish Al-Nusra at the beginning of the Syrian conflict.",1807,2012,all,1
+,source,target,event_description,sign,event_year,event_id,event_type
+0,1,661,Jaysh al Sanadeed began targeting the Islamic State.,-1,2011,1865,riv
+1,1,523,Ahrar al-Sham and the Islamic State coordinated an attack on Alawite villages in the Latakia governorate that killed 190 civilians.,1,2013,1821,all
+2,1,655,"Ahrar al-Sham, the Islamic State, and The Kurdish Islamic Front began targeting the YPG.",-1,2013,1855,riv
+3,1,533,"Jaysh al-Islam has opposed the Islamic State (IS) since 2013, and referred to IS as “enemy number one of the Syrian revolution.”",-1,2013,1871,riv
+4,1,493,"Jabhat al-Nusra (Al-Nusra) received funding and personnel from the Islamic State (which at the time operated as Al Qaeda in Iraq, or AQI) that helped establish Al-Nusra at the beginning of the Syrian conflict.",1,2012,1807,all
+5,1,629,KSS has fought IS in both Iraq and Syria since its inception in May 2013.,-1,2013,1669,riv
+6,1,671,Firqat al-Sultan Murad targets the Islamic State.,-1,2011,1963,riv
+7,523,493,Ahrar al-Sham and Jabhat al-Nusra first cooperated in an attack the International Center for Agricultural Research in the Dry Areas.,1,2012,1137,all
+8,523,655,"Ahrar al-Sham, the Islamic State, and The Kurdish Islamic Front began targeting the YPG.",-1,2013,1857,riv
+9,523,525," A number of opposition groups including Jabhat al-Nusra, Ahrar al-Sham, and Suqour al-Sham coordinated an attack to overtake the Assad Regime's air base in Taftanaz after beseiging the base for several months. The opposition groups eventually overtook Taftanaz, and seized helicopters, heavy weapons, and ammunition.",1,2013,1157,all
+10,523,527,"Liwa al-Tawhid participated in a joint offensive with multiple opposition groups, including Jabhat al-Nusra and Ahrar al-Sham, against Assad Regime military camps in the Idlib countryside.",1,2013,1809,all
+11,523,81,Ahrar al-Sham began opposing Hezbollah in 2013 after Hezbollah announced its involvement in the Syrian conflict. The groups still target each other today despite two ceasefires in 2015.,-1,2013,1873,riv
+12,525,537,"Suqour al-Sham was affiliated with the Free Syrian Army (FSA) in 2011, and became a founding a member of the FSA linked Syrian Islamic Liberation Front (SILF) umbrella organization in 2012. Despite its close FSA ties, Suqour al-Sham did not take orders from the FSA’s Syrian National Council, and began to distance itself from the FSA when it joined the Islamic Coalition on September 23, 2013.",1,2011,1843,aff
+13,525,493,"A number of opposition groups including Jabhat al-Nusra, Ahrar al-Sham, and Suqour al-Sham coordinated an attack to overtake the Assad Regime's air base in Taftanaz after beseiging the base for several months. The opposition groups eventually overtook Taftanaz, and seized helicopters, heavy weapons, and ammunition.",1,2013,1155,all
+14,653,493,"Liwa al-Islam began cooperating with Jabhat al-Nusra during """"Operation Epic in the Capital of Omayyads.""""",1,2012,1831,all
+15,653,533,"Saudi Arabia facilitated a merger of about fifty Damascus-based opposition groups, including Liwa al-Islam, to create a new opposition group known as Jaysh al-Islam.",1,2013,1795,mer
+16,653,537,"Liwa al-Islam was initially affiliated with the Free Syrian Army (FSA). However, the group began to distance itself from the FSA in 2013 when Liwa al-Islam joined the Islamic Coalition, a political group that called for the implementation of Shariah law in Syria, and for the opposition to the Assad Regime to be run only by groups fighting inside Syria.",1,2011,1849,aff
+17,143,81,"AAH received weapons, training, and financial support from Hezbollah. ",1,2009,941,aff
+18,527,493," Liwa al-Tawhid and Jabhat al-Nusra (Al-Nusra) cooperated with the Nasser Salahuddin Brigade, Dera’ al-Assima, and Liwa al-Habib al Mustafa in a series of attacks against Syrian army units and outposts in the Damascus countryside. According to Al-Nusra, the militants destroyed several tanks and killed over 150 Syrian soldiers.",1,2013,1811,all
+19,527,537,"Liwa al-Tawhid initially pledged allegiance to the Free Syrian Army (FSA). However, Liwa al-Tawhid often acted independently of FSA-affiliated groups, and it began to distance itself from the FSA on September 29, 2013 by joining the Islamic Coalition, a political group that called for opposition to the Assad Regime to be run only by groups fighting inside Syria and opposed the National Coalition for Syrian Revolutionary and Opposition Forces.",1,2012,1845,aff
+20,527,655,Liwa al-Tawhid cooperated with the Islamic State to fight the Kurdish People’s Protection Units in late 2013.,-1,2013,1881,riv
+21,655,535,"Ahrar al-Sham, the Islamic State, and The Kurdish Islamic Front began targeting the YPG.",-1,2013,1853,riv
+22,655,493,The YPG began targeting Jabhat al-Nusra and won the battle of Ras al-Ayn.,-1,2013,1859,riv
+23,657,493,Harakat Nour al-Din al-Zenki began cooperating with Jabhat al-Nusra.,1,2012,1829,all
+24,529,537,"Liwa al-Haqq was initially affiliated with the Free Syrian Army (FSA). However, it began to distance itself from the FSA on September 23, 2013 by joining the Islamic Coalition, a political group that called for the implementation of Shariah in Syria and the opposition to the Assad Regime to be run only by groups fighting inside Syria.",1,2012,1847,aff
+25,529,81,"Hezbollah began conducting operations with the Syrian army around al-Qusayr in March 2013. In May 2013, Hezbollah and the Syrian army launched an offensive against local opposition groups, and forced Jabhat al-Nusra, Liwa al-Haqq, and other insurgents out of the town of al-Qusayr.",-1,2013,1877,riv
+26,537,81,"Hezbollah and the Free Syrian Army (FSA) fought in Qusair, near Syria's border with Lebanon. An unnamed FSA Commander stated that he was prepared to send his fighters in to Lebanon to pursue Hezbollah. In August 2015, the FSA allegedly began coordinating with the Islamic State and Jabhat al-Nusra to target Hezbollah in Lebanon's Qalamoun mountains.",-1,2013,1931,riv
+27,81,361,"According to the U.S. government, Kata'ib Hezbollah has received money and weapons from Lebanese Hezbollah.",1,2009,885,aff
+28,361,619,"Kata'ib Hezbollah and Asa'ib Ahl al-Haqq purportedly formed HN as a front group for routing fighters to Syria in 2013.  However, since that time the group begun to operate autonomously from KH and AAH, which have both begun sending fighters to Syria under their own banners.  ",1,2013,1597,spl
