@@ -14,6 +14,7 @@ from .base import QuantumOptimizer, DEFAULT_LOCAL_SIMULATOR
 SUPPORTED_TASKS = {'maximum_clique': qml.qaoa.max_clique,
                   'minimum_vertex_cover': qml.qaoa.min_vertex_cover,
                    'maximum_cut' : qml.qaoa.maxcut,
+                   'maximum_independent_set' : qml.qaoa.max_independent_set
                   }
 BE_LOCAL = 'local'
 BE_AWS = 'aws'
