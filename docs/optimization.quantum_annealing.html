@@ -40,7 +40,7 @@ nb_path: "nbs/02_optimization.quantum_annealing.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="QuantumAnnealer" class="doc_header"><code>class</code> <code>QuantumAnnealer</code><a href="https://github.com/amaiya/quixotic/tree/main/quixotic/optimization/quantum_annealing.py#L37" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>QuantumAnnealer</code>(<strong><code>graph</code></strong>=<em><code>None</code></em>, <strong><code>task</code></strong>=<em><code>None</code></em>, <strong><code>bqm</code></strong>=<em><code>None</code></em>, <strong><code>backend</code></strong>=<em><code>'local'</code></em>, <strong><code>device_arn</code></strong>=<em><code>None</code></em>, <strong><code>s3_folder</code></strong>=<em><code>None</code></em>)</p>
+<h2 id="QuantumAnnealer" class="doc_header"><code>class</code> <code>QuantumAnnealer</code><a href="https://github.com/amaiya/quixotic/tree/main/quixotic/optimization/quantum_annealing.py#L37" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>QuantumAnnealer</code>(<strong><code>graph</code></strong>=<em><code>None</code></em>, <strong><code>task</code></strong>=<em><code>None</code></em>, <strong><code>qubo</code></strong>=<em><code>None</code></em>, <strong><code>backend</code></strong>=<em><code>'local'</code></em>, <strong><code>device_arn</code></strong>=<em><code>None</code></em>, <strong><code>s3_folder</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>quantum-based combinatorial optimization with Amazon Braket</p>
 <p>Usage:</p>
@@ -55,7 +55,12 @@ nb_path: "nbs/02_optimization.quantum_annealing.ipynb"
 <ul>
 <li><strong>graph</strong> : a networkx Graph object</li>
 <li><strong>task</strong> : task as <code>str</code>.  Invoke <code>supported_tasks</code> static method to see options.</li>
-<li><strong>bqm</strong> : A <code>dimod.BinaryQuadraticModel</code>. If bqm supplied, then graph and task parameters are not needed.</li>
+<li><strong>qubo</strong> : Coefficients of a quadratic unconstrained binary optimization
+<pre><code>       (QUBO) problem. Should be a dict of the form `{(u, v): bias, ...}`
+       where `u`, `v`, are binary-valued variables and `bias` is their
+       associated coefficient.
+       If qubo supplied, then graph and task parameters are not needed.</code></pre>
+</li>
 <li><p><strong>backend</strong> : One of <code>{'local', 'aws', 'dwave'}</code> where:</p>
 
 <pre><code>           - `local`: use a local solver (simulated annealing on your laptop)
@@ -95,11 +100,12 @@ nb_path: "nbs/02_optimization.quantum_annealing.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="QuantumAnnealer.execute" class="doc_header"><code>QuantumAnnealer.execute</code><a href="__main__.py#L113" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>QuantumAnnealer.execute</code>(<strong><code>verbose</code></strong>=<em><code>1</code></em>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="QuantumAnnealer.execute" class="doc_header"><code>QuantumAnnealer.execute</code><a href="__main__.py#L117" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>QuantumAnnealer.execute</code>(<strong><code>verbose</code></strong>=<em><code>1</code></em>, <strong><code>force_exact</code></strong>=<em><code>False</code></em>, <strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 <p>Approximate a solution to given task.
-Simulated Annealing is used when <a href="/quixotic/optimization.quantum_annealing.html#QuantumAnnealer.local=True"><code>QuantumAnnealer.local=True</code></a>.
-Quantum Annealing is used when <a href="/quixotic/optimization.quantum_annealing.html#QuantumAnnealer.local=False"><code>QuantumAnnealer.local=False</code></a>.</p>
+Simulated Annealing (or exact solver for small problems) is used when <a href="/quixotic/optimization.quantum_annealing.html#QuantumAnnealer.local=True"><code>QuantumAnnealer.local=True</code></a>.
+Quantum Annealing is used when <a href="/quixotic/optimization.quantum_annealing.html#QuantumAnnealer.local=False"><code>QuantumAnnealer.local=False</code></a>.
+If <code>force_exact=True</code>, an exact solver will be used regardless of <a href="/quixotic/optimization.quantum_annealing.html#QuantumAnnealer.local"><code>QuantumAnnealer.local</code></a>.</p>
 
 </div>
 
@@ -122,7 +128,7 @@ Quantum Annealing is used when <a href="/quixotic/optimization.quantum_annealing
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="QuantumAnnealer.results" class="doc_header"><code>QuantumAnnealer.results</code><a href="__main__.py#L171" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>QuantumAnnealer.results</code>(<strong>**<code>kwargs</code></strong>)</p>
+<h4 id="QuantumAnnealer.results" class="doc_header"><code>QuantumAnnealer.results</code><a href="__main__.py#L179" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>QuantumAnnealer.results</code>(<strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 <p>Return approximated solution</p>
 
@@ -147,7 +153,7 @@ Quantum Annealing is used when <a href="/quixotic/optimization.quantum_annealing
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="QuantumAnnealer.supported_tasks" class="doc_header"><code>QuantumAnnealer.supported_tasks</code><a href="__main__.py#L102" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>QuantumAnnealer.supported_tasks</code>()</p>
+<h4 id="QuantumAnnealer.supported_tasks" class="doc_header"><code>QuantumAnnealer.supported_tasks</code><a href="__main__.py#L106" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>QuantumAnnealer.supported_tasks</code>()</p>
 </blockquote>
 <p>Prints supported tasks (valid values for the <code>task</code> parameter).</p>
 
@@ -256,7 +262,7 @@ Quantum Annealing is used when <a href="/quixotic/optimization.quantum_annealing
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;__main__.QuantumAnnealer at 0x7f499f0f6c70&gt;</pre>
+<pre>&lt;__main__.QuantumAnnealer at 0x7f9e3738c160&gt;</pre>
 </div>
 
 </div>
@@ -373,7 +379,7 @@ Quantum Annealing is used when <a href="/quixotic/optimization.quantum_annealing
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Using-a-BinaryQuadraticModel">Using a <code>BinaryQuadraticModel</code><a class="anchor-link" href="#Using-a-BinaryQuadraticModel"> </a></h3><p>For more flexibility, you can formulate your problem as a <code>dimod.BinaryQuadraticModel</code> instance and supply that to <a href="/quixotic/optimization.quantum_annealing.html#QuantumAnnealer"><code>QuantumAnnealer</code></a> instead.  Here, we will solvethe same minimum vertex cover problem by formulating it as a binary quadratic model.  See <a href="https://leeds-faculty.colorado.edu/glover/511%20-%20QUBO%20Tutorial%20-%20updated%20version%20-%20May%204,%202019.pdf">this reference</a> for more details on how to formulate problems as binary quadratic models.</p>
+<h3 id="Using-a-BinaryQuadraticModel">Using a <code>BinaryQuadraticModel</code><a class="anchor-link" href="#Using-a-BinaryQuadraticModel"> </a></h3><p>For more flexibility, you can formulate your task as a quadratic unconstrained binary optimization problem (QUBO) and supply that to <a href="/quixotic/optimization.quantum_annealing.html#QuantumAnnealer"><code>QuantumAnnealer</code></a> instead.  Here, we will solve the same minimum vertex cover problem by formulating it as a QUBO expressed as a Python dictionary.  See <a href="https://leeds-faculty.colorado.edu/glover/511%20-%20QUBO%20Tutorial%20-%20updated%20version%20-%20May%204,%202019.pdf">this reference</a> for more details on how to formulate problems as binary quadratic models.</p>
 
 </div>
 </div>
@@ -389,11 +395,9 @@ Quantum Annealing is used when <a href="/quixotic/optimization.quantum_annealing
 <span class="n">scale</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">cost</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
 <span class="n">Q</span> <span class="o">=</span> <span class="p">{(</span><span class="n">node</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span> <span class="nb">min</span><span class="p">(</span><span class="o">-</span><span class="n">cost</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">/</span> <span class="n">scale</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">g</span><span class="p">}</span>
 <span class="n">Q</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">edge</span><span class="p">:</span> <span class="mf">2.0</span> <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">edges</span><span class="p">})</span> <span class="c1"># use 2.0 as &quot;tuning&quot; LaGrange value for this problem</span>
-<span class="kn">import</span> <span class="nn">dimod</span>
-<span class="n">bqm</span> <span class="o">=</span> <span class="n">dimod</span><span class="o">.</span><span class="n">BinaryQuadraticModel</span><span class="o">.</span><span class="n">from_qubo</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
 
-<span class="c1"># solve BQM</span>
-<span class="n">independent_set</span> <span class="o">=</span> <span class="n">QuantumAnnealer</span><span class="p">(</span><span class="n">bqm</span><span class="o">=</span><span class="n">bqm</span><span class="p">)</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">results</span><span class="p">()</span>
+<span class="c1"># solve qubo</span>
+<span class="n">independent_set</span> <span class="o">=</span> <span class="n">QuantumAnnealer</span><span class="p">(</span><span class="n">qubo</span><span class="o">=</span><span class="n">Q</span><span class="p">)</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">results</span><span class="p">()</span>
 
 <span class="c1"># nodes NOT in the independent set comprise the minimum vertex cover</span>
 <span class="n">solution_nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">g</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">independent_set</span><span class="p">]</span>

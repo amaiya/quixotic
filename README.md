@@ -3,7 +3,7 @@
 
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/amaiya/quixotic/develop/quixotic_example.png" width="800" style="max-width: 800px">
+<img src="https://raw.githubusercontent.com/amaiya/quixotic/develop/quixotic_screenshot.png" width="800" style="max-width: 800px">
 </p>
 
 ## What is Quixotic?
@@ -14,6 +14,7 @@
 - Includes out-of-the-box support for various optimization problems like maximum clique and minimum vertex cover.
 - Supports custom problem formulations as [QUBOs](https://leeds-faculty.colorado.edu/glover/511%20-%20QUBO%20Tutorial%20-%20updated%20version%20-%20May%204,%202019.pdf).
 - Simple-to-use execution of algorithms using both local simulation on your laptop and managed quantum computers on [Amazon Braket](https://aws.amazon.com/braket/) or the D-Wave LEAP service.
+- Quantum is Optional: serves as a general-purpose optimization library allowing you to solve problems on your laptop using simulated annealing and exact solvers
 
 ## Install
 

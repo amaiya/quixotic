@@ -54,7 +54,11 @@ class QuantumAnnealer:
 
     * **graph** : a networkx Graph object
     * **task** : task as `str`.  Invoke `supported_tasks` static method to see options.
-    * **bqm** : A `dimod.BinaryQuadraticModel`. If bqm supplied, then graph and task parameters are not needed.
+    * **qubo** : Coefficients of a quadratic unconstrained binary optimization
+                 (QUBO) problem. Should be a dict of the form `{(u, v): bias, ...}`
+                 where `u`, `v`, are binary-valued variables and `bias` is their
+                 associated coefficient.
+                 If qubo supplied, then graph and task parameters are not needed.
     * **backend** : One of `{'local', 'aws', 'dwave'}` where:
                      - `local`: use a local solver (simulated annealing on your laptop)
                      - `aws`: use Amazon Braket (`device_arn` and `3_folder` args required)
@@ -63,24 +67,24 @@ class QuantumAnnealer:
     * **device_arn** : Device ARN. Only required if not running locally.
     * **s3_folder** : S3 folder. Only required if not running locally.
     """
-    def __init__(self, graph=None, task=None, bqm=None, backend=BE_LOCAL,
+    def __init__(self, graph=None, task=None, qubo=None, backend=BE_LOCAL,
                  device_arn=None, s3_folder=None,
                  ):
         """
         constructor
         """
         # error checks
-        if (graph is None or task is None) and bqm is None:
-            raise ValueError('Either graph and task params must be supplied or bqm must be supplied.')
-        if (graph is not None or task is not None) and bqm is not None:
-            raise ValueError('bqm parameter is mutually exclusive with graph and task params.')
-        if bqm is not None and not isinstance(bqm, BinaryQuadraticModel):
-            raise ValueError('bqm must be an instance of dimod.BinaryQuadraticModel')
+        if (graph is None or task is None) and qubo is None:
+            raise ValueError('Either graph and task params must be supplied or qubo must be supplied.')
+        if (graph is not None or task is not None) and qubo is not None:
+            raise ValueError('qubo parameter is mutually exclusive with graph and task params.')
+        if qubo is not None and not isinstance(qubo, dict):
+            raise ValueError('qubo must be dict of the with keys/values of the form: {(u, v): bias}')
 
-        if bqm is None and task not in SUPPORTED_TASKS:
+        if qubo is None and task not in SUPPORTED_TASKS:
             raise ValueError(f'task {task} is not supported. ' +\
                              f'Supported tasks: {list(SUPPORTED_TASKS.keys())}')
-        if bqm is None and not isinstance(graph, nx.Graph):
+        if qubo is None and not isinstance(graph, nx.Graph):
             raise ValueError('g must be instance of networkx.Graph')
         if (device_arn is not None and s3_folder is None) or\
            (device_arn is None and s3_folder is not None):
@@ -93,7 +97,7 @@ class QuantumAnnealer:
         # input vars
         self.g = graph
         self.task = task
-        self.bqm = bqm
+        self.qubo = qubo
         self.backend = backend
         self.device_arn = device_arn
         self.s3_folder = s3_folder
@@ -114,25 +118,24 @@ class QuantumAnnealer:
     def is_local(self):
         return self.backend == BE_LOCAL
 
-    def execute(self, verbose=1, **kwargs):
+    def execute(self, verbose=1, force_exact=False,  **kwargs):
         """
         Approximate a solution to given task.
-        Simulated Annealing is used when `QuantumAnnealer.local=True`.
+        Simulated Annealing (or exact solver for small problems) is used when `QuantumAnnealer.local=True`.
         Quantum Annealing is used when `QuantumAnnealer.local=False`.
+        If `force_exact=True`, an exact solver will be used regardless of `QuantumAnnealer.local`.
         """
+        from dimod.reference.samplers import ExactSolver
+        import neal
 
         # setup sampler
         if self.backend == BE_LOCAL:
             #if self.g is not None and self.g.number_of_nodes() < 18:
             if self.g is not None and self.g.number_of_nodes() < 20:
-
-                from dimod.reference.samplers import ExactSolver
                 sampler = ExactSolver()
             else:
-                import neal
                 sampler = neal.SimulatedAnnealingSampler()
             if verbose: print('Executing locally.')
-
         elif self.backend == BE_AWS:
             braket_sampler = BraketSampler(self.s3_folder, self.device_arn)
             sampler = EmbeddingComposite(braket_sampler)
@@ -142,13 +145,16 @@ class QuantumAnnealer:
             if verbose: print('Executing on D-Wave LEAP.')
         else:
             raise ValueError(f'Unknown backend value: {self.backend}')
+        if force_exact:
+            if verbose: print('Using exact solver because force_exact=True.')
+            sampler = ExactSolver()
 
 
         # generate approximation
         kwargs = {}
         if self.task is not None and 'weighted' in self.task: kwargs['weight'] = 'weight'
 
-        if self.bqm is None:
+        if self.qubo is None:
             apx_fn = SUPPORTED_TASKS[self.task]
             if self.is_local():
                 result = apx_fn(self.g, sampler, **kwargs)
@@ -156,8 +162,10 @@ class QuantumAnnealer:
                 if self.backend == BE_AWS: kwargs['resultFormat'] = 'HISTOGRAM'
                 result = apx_fn(self.g, sampler, **kwargs)
         else:
+            bqm = BinaryQuadraticModel.from_qubo(self.qubo)
+
             # use the sampler to find low energy states
-            response = sampler.sample(self.bqm, **kwargs)
+            response = sampler.sample(bqm, **kwargs)
 
             # we want the lowest energy sample
             sample = next(iter(response))
