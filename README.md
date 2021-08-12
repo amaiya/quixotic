@@ -3,7 +3,7 @@
 
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/amaiya/quixotic/develop/quixotic_screenshot.png" width="800" style="max-width: 800px">
+<img src="https://raw.githubusercontent.com/amaiya/quixotic/develop/quixotic_screenshot.png" width="600" style="max-width: 600px">
 </p>
 
 ## What is Quixotic?
