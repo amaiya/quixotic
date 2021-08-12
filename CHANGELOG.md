@@ -6,6 +6,19 @@ Most recent releases are shown at the top. Each release shows:
 - **Changed**: Additional parameters, changes to inputs or outputs, etc
 - **Fixed**: Bug fixes that don't change documented behaviour
 
+## 0.0.6 (2021-08-12)
+
+### New:
+- N/A
+
+### Changed
+- replaced `bqm` parameter with `qubo` parameter in `QuantumAnnealer`
+- added `maximum_independent_set` as predefined task in `QAOA`
+
+### Fixed:
+- N/A
+
+
 ## 0.0.5 (2021-08-09)
 
 ### New:
